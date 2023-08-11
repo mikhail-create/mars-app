@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
-import DatePicker from 'react-native-modern-datepicker'
+import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker'
 import CalendarIcon from '../../assets/icons/calendar.svg'
 
 const CustomDatePicker = ({ placeholder, onSelect }) => {
@@ -12,7 +12,7 @@ const CustomDatePicker = ({ placeholder, onSelect }) => {
   };
 
   const dateChange = (propDate) => {
-    onSelect(propDate)
+    onSelect(propDate.replace(/\//g, '-'))
     setSelectedDate(propDate);
     toggleDatePicker()
   };

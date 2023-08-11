@@ -2,6 +2,8 @@ import { StyleSheet, View, Text, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import DropDown from '../shared/DropDown'
 import CustomDatePicker from '../shared/CustomDatePicker';
+import { fetchDataFromRover } from '../_services/fetchDataFromRover';
+import { useNavigation } from '@react-navigation/native';
 
 const options = [
   { label: 'Front Hazard Avoidance Camera', value: 'FHAZ' },
@@ -16,6 +18,8 @@ const options = [
 ];
 
 const ParamsBlock = () => {
+  const navigation = useNavigation()
+
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
 
@@ -27,11 +31,19 @@ const ParamsBlock = () => {
     setSelectedDate(date);
   };
 
-  const handleButtonClick = () => {
-    console.log('====================================');
-    console.log(selectedOption.value);
-    console.log(selectedDate);
-    console.log('====================================');
+  const handleButtonClick = async () => {
+    const params = {
+      earth_date: selectedDate,
+      camera: selectedOption.value,
+    };
+    try {
+      // console.log(params);
+      const data = await fetchDataFromRover(params);
+      navigation.replace('CameraRoll');
+      console.log('Ответ от сервера:', data);
+    } catch (error) {
+      console.error('Ошибка запроса:', error);
+    }
   }
 
   return (
