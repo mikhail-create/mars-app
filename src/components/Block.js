@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import DropDown from '../shared/DropDown'
+import CustomDatePicker from '../shared/CustomDatePicker';
 
 const options = [
   { label: 'Option 1', value: 1 },
@@ -23,6 +24,9 @@ const Block = () => {
         onSelect={handleOptionSelect}
       />
       <Text style={styles.label}>Date</Text>
+      <CustomDatePicker  
+        placeholder='Select Date'
+      />
       <Pressable style={styles.button}>
         <Text style={styles.button__text}>
           Explore

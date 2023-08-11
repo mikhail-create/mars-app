@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     letterSpacing: 0.36,
     position: 'relative',
-    zIndex: 1,
+    zIndex: 2,
   },
   wrapper: {
     width: '100%',
