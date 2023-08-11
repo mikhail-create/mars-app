@@ -8,7 +8,11 @@ export async function fetchDataFromRover(params) {
 
   try {
     const response = await axios.get(apiUrl, { params });
-    return response.data;
+    if (response.data.photos.length != 0) {
+      return response.data;
+    } else {
+      throw error;
+    }
   } catch (error) {
     throw error;
   }

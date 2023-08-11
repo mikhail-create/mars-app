@@ -7,6 +7,9 @@ const CustomDatePicker = ({ placeholder, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedDate, setSelectedDate] = useState(null)
 
+  const currentDate = new Date();
+  const maximumDate = getFormatedDate(currentDate.setDate(currentDate.getDate() - 1), 'YYYY/MM/DD')
+
   const toggleDatePicker = () => {
     setIsOpen(!isOpen);
   };
@@ -39,6 +42,7 @@ const CustomDatePicker = ({ placeholder, onSelect }) => {
               mode='calendar'
               selected={selectedDate}
               onDateChange={dateChange}
+              maximumDate={maximumDate}
             />
             <TouchableOpacity onPress={toggleDatePicker}>
               <Text style={styles.placeholder}>Close</Text>

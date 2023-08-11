@@ -7,6 +7,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from './src/screens/SplashScreen';
 import CameraRollScreen from './src/screens/CameraRollScreen';
 import ItemScreen from './src/screens/ItemScreen';
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -22,31 +24,33 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name='Item'
-          component={ItemScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name='Splash'
-          component={SplashScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name='Home'
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name='CameraRoll'
-          component={CameraRollScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-      <StatusBar style='auto' />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name='Splash'
+            component={SplashScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name='Home'
+            component={HomeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name='CameraRoll'
+            component={CameraRollScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name='Item'
+            component={ItemScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+        <StatusBar style='auto' />
+      </NavigationContainer>
+    </Provider >
   );
 }
 

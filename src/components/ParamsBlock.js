@@ -4,6 +4,8 @@ import DropDown from '../shared/DropDown'
 import CustomDatePicker from '../shared/CustomDatePicker';
 import { fetchDataFromRover } from '../_services/fetchDataFromRover';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { fetchFailure, fetchSuccess } from '../redux/actions/fetchDataAction';
 
 const options = [
   { label: 'Front Hazard Avoidance Camera', value: 'FHAZ' },
@@ -19,9 +21,11 @@ const options = [
 
 const ParamsBlock = () => {
   const navigation = useNavigation()
+  const dispatch = useDispatch();
 
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [fetchError, setFetchError] = useState('')
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
@@ -37,12 +41,15 @@ const ParamsBlock = () => {
       camera: selectedOption.value,
     };
     try {
-      // console.log(params);
-      const data = await fetchDataFromRover(params);
+      const fetchedData = await fetchDataFromRover(params);
+      dispatch(fetchSuccess(fetchedData));
       navigation.replace('CameraRoll');
-      console.log('Ответ от сервера:', data);
     } catch (error) {
-      console.error('Ошибка запроса:', error);
+      setFetchError('Try another settings')
+      setTimeout(() => {
+        setFetchError('')
+      }, 2000);
+      dispatch(fetchFailure(error));
     }
   }
 
@@ -64,10 +71,16 @@ const ParamsBlock = () => {
         style={styles.button}
         onPress={handleButtonClick}
       >
-        <Text style={styles.button__text}>
+        <Text style={styles.buttonLabel}>
           Explore
         </Text>
       </Pressable>
+      {
+        fetchError &&
+        <Text style={styles.errorMsg}>
+          {fetchError}
+        </Text>
+      }
     </View>
   )
 }
@@ -97,11 +110,18 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 3
   },
-  button__text: {
+  buttonLabel: {
     fontFamily: 'DosisSemiBold',
     fontSize: 18,
     letterSpacing: 0.36,
     color: '#FFF'
+  },
+  errorMsg: {
+    marginTop: 8,
+    fontFamily: 'Dosis',
+    fontSize: 18,
+    letterSpacing: 0.36,
+    textAlign: 'center'
   }
 })
 

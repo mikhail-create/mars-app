@@ -1,8 +1,11 @@
 import { FlatList, Image, StyleSheet, Text, View, Pressable } from 'react-native'
 import React from 'react'
 import ArrowLeft from '../../assets/icons/arrowLeft.svg'
+import { useSelector } from 'react-redux'
 
 const CameraRollScreen = ({ navigation }) => {
+
+  const imagesData = useSelector(state => state.data).photos;
 
   const handleNavigate = () => {
     navigation.replace('Home')
@@ -12,23 +15,24 @@ const CameraRollScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.navbar}>
         <Text style={styles.navbarTitle}>
-          Front Hazard Avoidance Camera
+          {imagesData[0].camera.full_name}
         </Text>
         <Text style={styles.navbarSubtitle}>
-          18 Oct, 2021
+          {imagesData[0].earth_date}
         </Text>
         <Pressable style={styles.navbarButton} onPress={handleNavigate}>
           <ArrowLeft stroke='#000' />
         </Pressable>
       </View>
       <FlatList
+        showsVerticalScrollIndicator={false}
         style={styles.list}
-        data={[1, 2, 3, 4, 1, 1, 1, 1, 1]}
+        data={imagesData}
         renderItem={({ item }) => (
           <Pressable>
             <Image
               style={styles.image}
-              source={require('../../assets/images/image.png')}
+              source={{ uri: item.img_src }}
             />
           </Pressable>
         )}
@@ -68,11 +72,13 @@ const styles = StyleSheet.create({
     bottom: 9
   },
   list: {
-    margin: 8,
+    margin: 12,
+    marginBottom: 36,
+    flexWrap: 'wrap',
   },
   image: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: 109,
+    height: 109,
     margin: 4,
     borderRadius: 10
   }
