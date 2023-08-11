@@ -5,7 +5,6 @@ import ArrowLeft from '../../assets/icons/arrowLeft.svg'
 const CameraRollScreen = ({ navigation }) => {
 
   const handleNavigate = () => {
-    console.log(123);
     navigation.replace('Home')
   };
 
@@ -19,7 +18,7 @@ const CameraRollScreen = ({ navigation }) => {
           18 Oct, 2021
         </Text>
         <Pressable style={styles.navbarButton} onPress={handleNavigate}>
-          <ArrowLeft />
+          <ArrowLeft stroke='#000' />
         </Pressable>
       </View>
       <FlatList

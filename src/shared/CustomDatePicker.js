@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import DatePicker from 'react-native-modern-datepicker'
 import CalendarIcon from '../../assets/icons/calendar.svg'
 
-const CustomDatePicker = ({ placeholder }) => {
+const CustomDatePicker = ({ placeholder, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedDate, setSelectedDate] = useState(null)
 
@@ -12,8 +12,9 @@ const CustomDatePicker = ({ placeholder }) => {
   };
 
   const dateChange = (propDate) => {
+    onSelect(propDate)
     setSelectedDate(propDate);
-    setIsOpen(!isOpen);
+    toggleDatePicker()
   };
 
   return (

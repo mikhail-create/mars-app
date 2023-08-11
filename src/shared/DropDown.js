@@ -10,16 +10,22 @@ const DropDown = ({ options, onSelect, placeholder }) => {
     setIsOpen(!isOpen);
   };
 
-  const handleSelect = (item) => {
-    onSelect(item);
-    setSelectedOption(item)
+  const handleSelect = (propOption) => {
+    onSelect(propOption);
+    setSelectedOption(propOption)
     toggleDropDown();
   };
 
   return (
     <View style={styles.dropdown}>
       <TouchableOpacity style={styles.wrapper} onPress={toggleDropDown}>
-        <Text style={styles.placeholder}>{selectedOption ? selectedOption.label : placeholder}</Text>
+        <Text
+          style={styles.placeholder}
+          numberOfLines={1}
+          ellipsizeMode='tail'
+        >
+          {selectedOption ? selectedOption.label : placeholder}
+        </Text>
         <ArrowDown />
       </TouchableOpacity>
       {isOpen && (
@@ -63,7 +69,8 @@ const styles = StyleSheet.create({
   },
   placeholder: {
     fontFamily: 'Dosis',
-    fontSize: 18
+    fontSize: 18,
+    maxWidth: '90%'
   },
   list: {
     position: 'absolute',

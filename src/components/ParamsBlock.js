@@ -4,17 +4,36 @@ import DropDown from '../shared/DropDown'
 import CustomDatePicker from '../shared/CustomDatePicker';
 
 const options = [
-  { label: 'Option 1', value: 1 },
-  { label: 'Option 2', value: 2 },
-  { label: 'Option 3', value: 3 },
+  { label: 'Front Hazard Avoidance Camera', value: 'FHAZ' },
+  { label: 'Rear Hazard Avoidance Camera', value: 'RHAZ' },
+  { label: 'Mast Camera', value: 'MAST' },
+  { label: 'Chemistry and Camera Complex', value: 'CHEMCAM' },
+  { label: 'Mars Hand Lens Imager', value: 'MAHLI' },
+  { label: 'Mars Descent Imager', value: 'MARDI' },
+  { label: 'Navigation Camera', value: 'NAVCAM' },
+  { label: 'Panoramic Camera', value: 'PANCAM' },
+  { label: 'Miniature Thermal Emission Spectrometer (Mini-TES)', value: 'MINITES	' },
 ];
 
 const ParamsBlock = () => {
   const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
   };
+
+  const handleDatePickerSelect = (date) => {
+    setSelectedDate(date);
+  };
+
+  const handleButtonClick = () => {
+    console.log('====================================');
+    console.log(selectedOption.value);
+    console.log(selectedDate);
+    console.log('====================================');
+  }
+
   return (
     <View style={styles.block}>
       <Text style={styles.label}>Rover Camera</Text>
@@ -24,10 +43,15 @@ const ParamsBlock = () => {
         onSelect={handleOptionSelect}
       />
       <Text style={styles.label}>Date</Text>
-      <CustomDatePicker  
+      <CustomDatePicker
+        onSelect={handleDatePickerSelect}
         placeholder='Select Date'
       />
-      <Pressable style={styles.button}>
+      <Pressable
+        disabled={!selectedDate && !selectedOption}
+        style={styles.button}
+        onPress={handleButtonClick}
+      >
         <Text style={styles.button__text}>
           Explore
         </Text>

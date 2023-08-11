@@ -6,6 +6,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from './src/screens/SplashScreen';
 import CameraRollScreen from './src/screens/CameraRollScreen';
+import ItemScreen from './src/screens/ItemScreen';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -24,8 +25,8 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name='CameraRoll'
-          component={CameraRollScreen}
+          name='Item'
+          component={ItemScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -36,6 +37,11 @@ export default function App() {
         <Stack.Screen
           name='Home'
           component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='CameraRoll'
+          component={CameraRollScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

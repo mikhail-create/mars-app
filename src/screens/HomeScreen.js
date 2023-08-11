@@ -21,6 +21,8 @@ const HomeScreen = () => {
   )
 }
 
+export default HomeScreen
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -53,6 +55,3 @@ const styles = StyleSheet.create({
     zIndex: 0,
   }
 });
-
-
-export default HomeScreen
