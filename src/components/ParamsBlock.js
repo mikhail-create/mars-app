@@ -9,7 +9,7 @@ const options = [
   { label: 'Option 3', value: 3 },
 ];
 
-const Block = () => {
+const ParamsBlock = () => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOptionSelect = (option) => {
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Block
+export default ParamsBlock

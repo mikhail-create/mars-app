@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
-import DropDownIcon from '../../assets/icons/dropdown.svg'
+import ArrowDown from '../../assets/icons/arrowDown.svg'
 
 const DropDown = ({ options, onSelect, placeholder }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +20,7 @@ const DropDown = ({ options, onSelect, placeholder }) => {
     <View style={styles.dropdown}>
       <TouchableOpacity style={styles.wrapper} onPress={toggleDropDown}>
         <Text style={styles.placeholder}>{selectedOption ? selectedOption.label : placeholder}</Text>
-        <DropDownIcon />
+        <ArrowDown />
       </TouchableOpacity>
       {isOpen && (
         <FlatList

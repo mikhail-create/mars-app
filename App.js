@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from './src/screens/SplashScreen';
+import CameraRollScreen from './src/screens/CameraRollScreen';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -22,6 +23,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name='CameraRoll'
+          component={CameraRollScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name='Splash'
           component={SplashScreen}

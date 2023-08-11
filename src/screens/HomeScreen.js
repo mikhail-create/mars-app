@@ -1,17 +1,17 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
-import Block from '../components/Block'
+import ParamsBlock from '../components/ParamsBlock'
 import React from 'react'
 
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.navbar}>
-        <Text style={styles.navbar__text}>
+        <Text style={styles.navbarTitle}>
           Select Camera and Date
         </Text>
       </View>
       <View style={styles.block}>
-        <Block />
+        <ParamsBlock />
       </View>
       <Image
         style={styles.image}
@@ -23,7 +23,7 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+    flex: 1,
     backgroundColor: '#DCCEBE',
     alignItems: 'center',
   },
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
-  navbar__text: {
+  navbarTitle: {
     fontSize: 18,
     fontFamily: 'DosisSemiBold'
   },
