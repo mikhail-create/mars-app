@@ -1,66 +1,44 @@
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import Block from './src/components/Block';
+import { View, StyleSheet } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './src/screens/HomeScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import SplashScreen from './src/screens/SplashScreen';
 
 export default function App() {
   const [loaded] = useFonts({
     Dosis: require('./assets/fonts/TerminalDosis-Regular.ttf'),
     DosisSemiBold: require('./assets/fonts/TerminalDosis-SemiBold.ttf'),
+    DosisExtraLight: require('./assets/fonts/TerminalDosis-ExtraLight.ttf'),
   });
 
   if (!loaded) {
     return null;
   }
 
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <View style={styles.navbar}>
-        <Text style={styles.navbar__text}>
-          Select Camera and Date
-        </Text>
-      </View>
-      <View style={styles.block}>
-        <Block />
-      </View>
-      <Image
-        style={styles.image}
-        source={require('./assets/images/rover-image.png')}
-      />
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name='Splash'
+          component={SplashScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='Home'
+          component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
       <StatusBar style='auto' />
-    </View>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#DCCEBE',
-    alignItems: 'center',
   },
-  navbar: {
-    width: '100%',
-    height: 88,
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  navbar__text: {
-    fontSize: 18,
-    fontFamily: 'DosisSemiBold'
-  },
-  block: {
-    marginTop: '40%',
-    width: '100%',
-    paddingLeft: 24,
-    paddingRight: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 2
-  },
-  image: {
-    bottom: 0,
-    position: 'absolute',
-    width: '100%',
-    zIndex: 0,
-  }
-});
+})

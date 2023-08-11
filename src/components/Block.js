@@ -1,13 +1,26 @@
-import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native'
-import React from 'react'
+import { StyleSheet, View, Text, Pressable } from 'react-native'
+import React, { useState } from 'react'
 import DropDown from '../shared/DropDown'
 
+const options = [
+  { label: 'Option 1', value: 1 },
+  { label: 'Option 2', value: 2 },
+  { label: 'Option 3', value: 3 },
+];
+
 const Block = () => {
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleOptionSelect = (option) => {
+    setSelectedOption(option);
+  };
   return (
     <View style={styles.block}>
       <Text style={styles.label}>Rover Camera</Text>
       <DropDown
+        options={options}
         placeholder='Select Rover Camera'
+        onSelect={handleOptionSelect}
       />
       <Text style={styles.label}>Date</Text>
       <Pressable style={styles.button}>
