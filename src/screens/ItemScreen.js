@@ -1,18 +1,15 @@
-import { StyleSheet, Text, View, Pressable, Image } from 'react-native'
+import { StyleSheet, Text, View, Pressable } from 'react-native'
 import React from 'react'
+import { ImageZoom } from '@likashefqet/react-native-image-zoom';
 import ArrowLeft from '../../assets/icons/arrowLeft.svg'
-import ShareIcon from '../../assets/icons/share.svg'
+import ShareButton from '../shared/ShareButton'
 
 const ItemScreen = ({ route, navigation }) => {
-  
+
   const { selectedImage } = route.params;
 
   const handleNavigate = () => {
     navigation.replace('CameraRoll')
-  };
-
-  const handleShare = () => {
-    console.log('Shared');
   };
 
   return (
@@ -27,11 +24,18 @@ const ItemScreen = ({ route, navigation }) => {
         <Pressable style={styles.navbarButtonBack} onPress={handleNavigate}>
           <ArrowLeft stroke='#fff' />
         </Pressable>
-        <Pressable style={styles.navbarButtonShare} onPress={handleShare}>
-          <ShareIcon />
-        </Pressable>
+        <View style={styles.navbarButtonShare}>
+          <ShareButton
+            title={selectedImage.camera.full_name}
+            message='Look at this Mars Photo!'
+            url={selectedImage.img_src}
+          />
+        </View>
       </View>
-      <Image
+      <ImageZoom
+        minScale={0.5}
+        maxScale={3}
+        resizeMode="cover"
         style={styles.image}
         source={{ uri: selectedImage.img_src }}
       />
@@ -72,13 +76,14 @@ const styles = StyleSheet.create({
   },
   navbarButtonShare: {
     position: 'absolute',
-    right: 16,
+    right: 24,
     bottom: 9
   },
   image: {
     width: '95%',
     height: '80%',
-    margin: 16,
+    marginTop: 16,
+    marginBottom: 16,
     marginBottom: 16,
     borderRadius: 10
   }
