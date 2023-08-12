@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export async function fetchDataFromRover(params) {
   const apiUrl = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos';

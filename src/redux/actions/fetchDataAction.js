@@ -1,4 +1,4 @@
-import { FETCH_FAILURE, FETCH_SUCCESS } from "../types";
+import { FETCH_FAILURE, FETCH_SUCCESS } from '../types';
 
 export const fetchSuccess = (data) => ({
   type: FETCH_SUCCESS,

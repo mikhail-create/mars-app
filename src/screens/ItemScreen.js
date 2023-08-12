@@ -35,7 +35,7 @@ const ItemScreen = ({ route, navigation }) => {
       <ImageZoom
         minScale={0.5}
         maxScale={3}
-        resizeMode="cover"
+        resizeMode='cover'
         style={styles.image}
         source={{ uri: selectedImage.img_src }}
       />

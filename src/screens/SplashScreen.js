@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import  React, { useEffect } from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 
 const SplashScreen = ({ navigation }) => {

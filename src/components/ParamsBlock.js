@@ -44,7 +44,6 @@ const ParamsBlock = () => {
 
     setIsLoading(true);
 
-
     try {
       const fetchedData = await fetchDataFromRover(params);
       dispatch(fetchSuccess(fetchedData));

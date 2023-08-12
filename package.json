@@ -6,7 +6,9 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "eslint .",
+    "lint:fix": "npx eslint ."
   },
   "dependencies": {
     "@likashefqet/react-native-image-zoom": "^2.1.1",
@@ -31,6 +33,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "eslint": "^8.47.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.33.1",
+    "eslint-plugin-react-native": "^4.0.0",
     "metro-config": "^0.78.0"
   },
   "private": true
