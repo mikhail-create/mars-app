@@ -3,7 +3,9 @@ import React from 'react'
 import ArrowLeft from '../../assets/icons/arrowLeft.svg'
 import ShareIcon from '../../assets/icons/share.svg'
 
-const ItemScreen = ({ navigation }) => {
+const ItemScreen = ({ route, navigation }) => {
+  
+  const { selectedImage } = route.params;
 
   const handleNavigate = () => {
     navigation.replace('CameraRoll')
@@ -20,7 +22,7 @@ const ItemScreen = ({ navigation }) => {
           Photo ID
         </Text>
         <Text style={styles.navbarTitle}>
-          108256
+          {selectedImage.id}
         </Text>
         <Pressable style={styles.navbarButtonBack} onPress={handleNavigate}>
           <ArrowLeft stroke='#fff' />
@@ -29,9 +31,10 @@ const ItemScreen = ({ navigation }) => {
           <ShareIcon />
         </Pressable>
       </View>
-      <View style={styles.image}>
-        <Image source={require('../../assets/images/imageBig.png')} />
-      </View>
+      <Image
+        style={styles.image}
+        source={{ uri: selectedImage.img_src }}
+      />
     </View>
   )
 }
@@ -73,8 +76,10 @@ const styles = StyleSheet.create({
     bottom: 9
   },
   image: {
-    objectFit: 'fill',
+    width: '95%',
+    height: '80%',
     margin: 16,
-    borderRadius: 8
+    marginBottom: 16,
+    borderRadius: 10
   }
 })

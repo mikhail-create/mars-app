@@ -9,6 +9,7 @@ import CameraRollScreen from './src/screens/CameraRollScreen';
 import ItemScreen from './src/screens/ItemScreen';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -25,31 +26,37 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name='Splash'
-            component={SplashScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name='Home'
-            component={HomeScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name='CameraRoll'
-            component={CameraRollScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name='Item'
-            component={ItemScreen}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-        <StatusBar style='auto' />
-      </NavigationContainer>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              animation: 'fade_from_bottom'
+            }}
+          >
+            <Stack.Screen
+              name='Splash'
+              component={SplashScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name='Home'
+              component={HomeScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name='CameraRoll'
+              component={CameraRollScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name='Item'
+              component={ItemScreen}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+          <StatusBar style='auto' />
+        </NavigationContainer>
+      </GestureHandlerRootView>
     </Provider >
   );
 }

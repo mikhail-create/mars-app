@@ -8,7 +8,7 @@ const CameraRollScreen = ({ navigation }) => {
   const imagesData = useSelector(state => state.data).photos;
 
   const handleNavigate = () => {
-    navigation.replace('Home')
+    navigation.navigate('Home')
   };
 
   return (
@@ -29,7 +29,11 @@ const CameraRollScreen = ({ navigation }) => {
         style={styles.list}
         data={imagesData}
         renderItem={({ item }) => (
-          <Pressable>
+          <Pressable
+            onPress={() => {
+              navigation.navigate('Item', { selectedImage: item });
+            }}
+          >
             <Image
               style={styles.image}
               source={{ uri: item.img_src }}

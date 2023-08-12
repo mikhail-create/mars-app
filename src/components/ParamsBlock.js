@@ -26,6 +26,7 @@ const ParamsBlock = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [fetchError, setFetchError] = useState('')
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
@@ -40,16 +41,22 @@ const ParamsBlock = () => {
       earth_date: selectedDate,
       camera: selectedOption.value,
     };
+
+    setIsLoading(true);
+
+
     try {
       const fetchedData = await fetchDataFromRover(params);
       dispatch(fetchSuccess(fetchedData));
-      navigation.replace('CameraRoll');
+      navigation.navigate('CameraRoll');
     } catch (error) {
       setFetchError('Try another settings')
       setTimeout(() => {
         setFetchError('')
       }, 2000);
       dispatch(fetchFailure(error));
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -68,17 +75,23 @@ const ParamsBlock = () => {
       />
       <Pressable
         disabled={!selectedDate && !selectedOption}
-        style={styles.button}
+        style={({ pressed }) => [
+          {
+            backgroundColor: pressed ? '#9D1C00' :
+              (selectedDate && selectedOption) ? '#BF2E0E' : '#BB705F',
+          },
+          styles.button
+        ]}
         onPress={handleButtonClick}
       >
         <Text style={styles.buttonLabel}>
-          Explore
+          {isLoading ? 'Loading...' : 'Explore'}
         </Text>
       </Pressable>
       {
         fetchError &&
         <Text style={styles.errorMsg}>
-          {fetchError}
+          {`No photos was created by ${selectedOption.value} for current date`}
         </Text>
       }
     </View>
@@ -102,7 +115,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    backgroundColor: '#BF2E0E',
+    // backgroundColor: '#BF2E0E',
     marginTop: 24,
     shadowColor: '#171717',
     shadowOffset: { width: -2, height: 4 },

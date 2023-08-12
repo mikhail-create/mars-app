@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: 'DosisSemiBold',
     letterSpacing: 0.48,
+    paddingLeft: 4,
     color: '#DCCEBE'
   }
 });
